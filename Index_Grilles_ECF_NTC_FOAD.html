@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grilles ECF — NTC FOAD</title>
+<style>
+  :root {
+    --blue: #0E71B8;
+    --blue-dark: #0B5A93;
+    --orange: #F57C00;
+    --gray-text: #333333;
+    --gray-box: #F5F5F5;
+    --gray-border: #DDDDDD;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: Calibri, Arial, sans-serif;
+    color: var(--gray-text);
+    line-height: 1.5;
+    margin: 0;
+    padding: 0 0 60px 0;
+    background: #F2F4F6;
+  }
+  header {
+    background: linear-gradient(90deg, var(--blue-dark), var(--blue));
+    color: #FFFFFF;
+    padding: 34px 24px 28px 24px;
+  }
+  header .wrap { max-width: 1000px; margin: 0 auto; }
+  .eyebrow {
+    display: inline-block;
+    background: rgba(255,255,255,0.18);
+    color: #FFFFFF;
+    font-size: 12.5px;
+    font-weight: bold;
+    letter-spacing: 0.6px;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+  }
+  h1 { font-size: 26px; margin: 0 0 6px 0; }
+  header p { font-size: 14.5px; color: #DCEEFB; margin: 0; max-width: 720px; }
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
+  .intro-box {
+    background: #FFFFFF;
+    border: 1px solid var(--gray-border);
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin: -18px 0 26px 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    font-size: 14px;
+    color: #444444;
+  }
+  .intro-box strong { color: var(--blue-dark); }
+  .confidential {
+    background: #FBE0DC;
+    color: #B23A2E;
+    font-size: 12.5px;
+    font-weight: bold;
+    letter-spacing: 0.4px;
+    padding: 5px 14px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+  h2.at-title {
+    font-size: 15px;
+    color: var(--blue-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid var(--blue);
+    padding-bottom: 6px;
+    margin: 32px 0 14px 0;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 14px;
+  }
+  .card {
+    background: #FFFFFF;
+    border: 1px solid var(--gray-border);
+    border-radius: 10px;
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  }
+  .card.disabled { background: #FAFAFA; opacity: 0.72; }
+  .card .num {
+    display: inline-block;
+    font-family: Consolas, monospace;
+    font-size: 11.5px;
+    font-weight: bold;
+    color: #FFFFFF;
+    background: var(--blue);
+    padding: 3px 9px;
+    border-radius: 12px;
+    width: fit-content;
+  }
+  .card.disabled .num { background: #9AA5AE; }
+  .card .mod-title { font-size: 15.5px; font-weight: bold; color: var(--gray-text); margin: 2px 0 0 0; }
+  .card .mod-comp { font-size: 12.5px; color: #666666; margin: 0; min-height: 32px; }
+  .btn {
+    display: inline-block;
+    text-align: center;
+    background: var(--orange);
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: 13px;
+    padding: 9px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    margin-top: 4px;
+  }
+  .btn:hover { opacity: 0.9; }
+  .btn.soon {
+    background: #E4E7EA;
+    color: #8A9199;
+    cursor: default;
+    pointer-events: none;
+  }
+  .status-live { color: #3F8F52; font-size: 11.5px; font-weight: bold; }
+  .status-soon { color: #9AA5AE; font-size: 11.5px; font-weight: bold; }
+  footer {
+    max-width: 1000px;
+    margin: 40px auto 0 auto;
+    padding: 0 24px;
+    font-size: 11.5px;
+    color: #999999;
+  }
+</style>
+</head>
+<body>
+
+  <header>
+    <div class="wrap">
+      <span class="eyebrow">MY PARTNER SCHOOL — ESPACE MENTOR / JURY</span>
+      <h1>Grilles ECF — Négociateur Technico-Commercial</h1>
+      <p>Parcours FOAD · Titre Professionnel NTC · RNCP 39063 · REAC TP-00338 · Niveau 5. Index des grilles d'évaluation (ECF) remplissables en ligne, une par module du parcours.</p>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <div class="intro-box">
+      <span class="confidential">Document confidentiel — usage jury / équipe pédagogique</span><br/><br/>
+      Chaque module du parcours (1 par mois, entrée individuelle glissante) donne lieu à une soutenance ECF et à sa propre grille d'évaluation. Cette page centralise l'accès à la version <strong>remplissable en ligne</strong> de chaque grille (échelle A/B/C/D, sans note chiffrée, avec signature de l'évaluateur). Elle est mise à jour au fil de la production des modules suivants.
+    </div>
+
+    <h2 class="at-title">AT1 — Élaborer une stratégie de prospection et la mettre en œuvre</h2>
+    <div class="grid">
+
+      <div class="card">
+        <span class="num">MODULE 1</span>
+        <p class="mod-title">Analyser son secteur d'activité</p>
+        <p class="mod-comp">Compétence professionnelle n°1 — Assurer une veille commerciale</p>
+        <span class="status-live">● Grille disponible</span>
+        <a class="btn" href="Grille_ECF_Module1_S4_Remplissable.html" target="_blank" rel="noopener noreferrer">↓ Ouvrir la grille ECF</a>
+      </div>
+
+      <div class="card disabled">
+        <span class="num">MODULE 2</span>
+        <p class="mod-title">À venir</p>
+        <p class="mod-comp">Compétence professionnelle n°2 — Concevoir et organiser un plan d'actions commerciales</p>
+        <span class="status-soon">○ Grille à venir</span>
+        <span class="btn soon">Bientôt disponible</span>
+      </div>
+
+      <div class="card disabled">
+        <span class="num">MODULE 3</span>
+        <p class="mod-title">À venir</p>
+        <p class="mod-comp">Compétence professionnelle n°3 — Prospecter un secteur défini</p>
+        <span class="status-soon">○ Grille à venir</span>
+        <span class="btn soon">Bientôt disponible</span>
+      </div>
+
+      <div class="card disabled">
+        <span class="num">MODULE 4</span>
+        <p class="mod-title">À venir</p>
+        <p class="mod-comp">Compétence professionnelle n°4 — Analyser ses performances, actions correctives</p>
+        <span class="status-soon">○ Grille à venir</span>
+        <span class="btn soon">Bientôt disponible</span>
+      </div>
+
+    </div>
+
+    <h2 class="at-title">AT2 — Négocier une solution technique et commerciale, consolider l'expérience client</h2>
+    <div class="grid">
+
+      <div class="card disabled">
+        <span class="num">MODULE 5</span>
+        <p class="mod-title">À venir</p>
+        <p class="mod-comp">Compétence professionnelle n°5 — Représenter l'entreprise, valoriser son image</p>
+        <span class="status-soon">○ Grille à venir</span>
+        <span class="btn soon">Bientôt disponible</span>
+      </div>
+
+      <div class="card disabled">
+        <span class="num">MODULE 6</span>
+        <p class="mod-title">À venir</p>
+        <p class="mod-comp">Compétence professionnelle n°6 — Concevoir une proposition technique et commerciale</p>
+        <span class="status-soon">○ Grille à venir</span>
+        <span class="btn soon">Bientôt disponible</span>
+      </div>
+
+      <div class="card disabled">
+        <span class="num">MODULE 7</span>
+        <p class="mod-title">À venir</p>
+        <p class="mod-comp">Compétence professionnelle n°7 — Négocier une solution technique</p>
+        <span class="status-soon">○ Grille à venir</span>
+        <span class="btn soon">Bientôt disponible</span>
+      </div>
+
+      <div class="card disabled">
+        <span class="num">MODULE 8</span>
+        <p class="mod-title">À venir</p>
+        <p class="mod-comp">Compétence professionnelle n°8 — Réaliser le bilan, ajuster l'activité, rendre compte</p>
+        <span class="status-soon">○ Grille à venir</span>
+        <span class="btn soon">Bientôt disponible</span>
+      </div>
+
+      <div class="card disabled">
+        <span class="num">MODULE 9</span>
+        <p class="mod-title">À venir</p>
+        <p class="mod-comp">Compétence professionnelle n°9 — Optimiser la gestion de la relation client</p>
+        <span class="status-soon">○ Grille à venir</span>
+        <span class="btn soon">Bientôt disponible</span>
+      </div>
+
+    </div>
+
+    <h2 class="at-title">Modules complémentaires</h2>
+    <div class="grid">
+
+      <div class="card disabled">
+        <span class="num">MODULE 10</span>
+        <p class="mod-title">À venir</p>
+        <p class="mod-comp">Intitulé et compétence(s) associée(s) en cours d'arbitrage</p>
+        <span class="status-soon">○ Grille à venir</span>
+        <span class="btn soon">Bientôt disponible</span>
+      </div>
+
+      <div class="card disabled">
+        <span class="num">MODULE 11</span>
+        <p class="mod-title">À venir</p>
+        <p class="mod-comp">Intitulé et compétence(s) associée(s) en cours d'arbitrage</p>
+        <span class="status-soon">○ Grille à venir</span>
+        <span class="btn soon">Bientôt disponible</span>
+      </div>
+
+      <div class="card disabled">
+        <span class="num">MODULE 12</span>
+        <p class="mod-title">Projet de certification</p>
+        <p class="mod-comp">Épreuve finale — mise en situation professionnelle (8h30), toutes compétences du REAC TP-00338</p>
+        <span class="status-soon">○ Grille à venir</span>
+        <span class="btn soon">Bientôt disponible</span>
+      </div>
+
+    </div>
+
+    <footer>
+      © My Partner School – Document confidentiel · Titre Professionnel Négociateur Technico-Commercial · TP-00338 · Niveau 5 · Index mis à jour au fil de la production des modules.
+    </footer>
+  </div>
+
+</body>
+</html>
