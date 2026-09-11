@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grille ECF — Module 1 — Semaine 4</title>
+<style>
+  :root {
+    --blue: #0E71B8;
+    --blue-dark: #0B5A93;
+    --orange: #F57C00;
+    --gray-text: #333333;
+    --gray-box: #F5F5F5;
+    --gray-border: #DDDDDD;
+    --alt-row: #FAFAFA;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: Calibri, Arial, sans-serif;
+    color: var(--gray-text);
+    line-height: 1.5;
+    margin: 0;
+    padding: 24px 16px 60px 16px;
+    background: #EFEFEF;
+  }
+  .sheet {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #FFFFFF;
+    padding: 32px;
+    border-radius: 10px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+  }
+  .badge {
+    display: inline-block;
+    background: #FBE0DC;
+    color: #B23A2E;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    padding: 5px 16px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+  }
+  h1 { font-size: 20px; color: var(--blue); margin: 0 0 2px 0; }
+  .subtitle { font-size: 14px; color: #666666; margin: 0 0 2px 0; }
+  .competence { font-size: 13.5px; color: var(--blue-dark); font-weight: bold; margin: 0 0 20px 0; }
+  .toolbar {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 0 0 22px 0;
+    position: sticky;
+    top: 0;
+    background: #FFFFFF;
+    padding: 8px 0;
+    z-index: 5;
+  }
+  button.action {
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: bold;
+    color: #FFFFFF;
+    background: var(--blue);
+    border: none;
+    border-radius: 6px;
+    padding: 10px 18px;
+    cursor: pointer;
+  }
+  button.action.secondary { background: #6B6B6B; }
+  button.action.small { padding: 6px 12px; font-size: 12.5px; }
+  button.action:hover { opacity: 0.9; }
+  .section-title {
+    background: var(--blue);
+    color: #FFFFFF;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 22px 0 10px 0;
+  }
+  table { width: 100%; border-collapse: collapse; margin-bottom: 6px; }
+  th, td {
+    border: 1px solid var(--gray-border);
+    padding: 8px 10px;
+    font-size: 13.5px;
+    text-align: left;
+    vertical-align: middle;
+  }
+  th { background: var(--blue-dark); color: #FFFFFF; font-size: 12.5px; text-align: center; }
+  th.crit-col { text-align: left; }
+  tr:nth-child(even) td { background: var(--alt-row); }
+  th.lvl-A { background: #3F8F52; }
+  th.lvl-B { background: #8CB93E; }
+  th.lvl-C { background: #E8A33D; }
+  th.lvl-D { background: #C1462F; }
+  td.lvl-A { background: #E3F2E1 !important; }
+  td.lvl-B { background: #EEF2D6 !important; }
+  td.lvl-C { background: #FBEACB !important; }
+  td.lvl-D { background: #FBDBD4 !important; }
+  .id-table td:first-child { width: 30%; font-weight: bold; color: #444444; background: var(--gray-box); }
+  input[type="text"], input[type="date"], textarea {
+    width: 100%;
+    font-family: inherit;
+    font-size: 13.5px;
+    padding: 6px 8px;
+    border: 1px solid #BBBBBB;
+    border-radius: 4px;
+    color: var(--gray-text);
+  }
+  textarea { resize: vertical; min-height: 60px; }
+  .radio-cell { text-align: center; }
+  .radio-cell label { cursor: pointer; display: inline-block; }
+  .radio-cell input { display: none; }
+  .radio-glyph { font-size: 17px; }
+  .note-box {
+    background: #DCEEFB;
+    border: 1px solid #B8D9F0;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 13px;
+    color: var(--blue-dark);
+    margin: 10px 0 18px 0;
+  }
+  .version-row { display: flex; gap: 24px; flex-wrap: wrap; margin: 4px 0 22px 0; font-size: 14px; font-weight: bold; }
+  .version-row label { display: flex; align-items: center; gap: 6px; cursor: pointer; }
+  .footer-note {
+    font-size: 11px;
+    color: #999999;
+    margin-top: 24px;
+  }
+  .sig-block {
+    border: 1px solid var(--gray-border);
+    border-radius: 8px;
+    padding: 14px;
+    margin-bottom: 14px;
+  }
+  .sig-block label.name { font-size: 12.5px; color: #666666; display: block; margin-bottom: 6px; }
+  canvas.sigpad {
+    display: block;
+    width: 100%;
+    max-width: 500px;
+    height: 140px;
+    border: 1px dashed #AAAAAA;
+    border-radius: 6px;
+    background: #FFFFFF;
+    touch-action: none;
+    cursor: crosshair;
+  }
+  .sig-actions { margin-top: 6px; display: flex; gap: 8px; align-items: center; }
+  .sig-date { display: inline-block; margin-left: 10px; }
+  .sig-date input { width: 160px; display: inline-block; }
+
+  @media print {
+    body { background: #FFFFFF; padding: 0; }
+    .sheet { box-shadow: none; padding: 0; max-width: 100%; }
+    .toolbar { display: none; }
+    input[type="text"], input[type="date"], textarea { border: none; border-bottom: 1px solid #999999; border-radius: 0; padding: 2px 0; }
+    canvas.sigpad { border: 1px solid #999999; }
+  }
+</style>
+</head>
+<body>
+  <div class="sheet">
+    <span class="badge">DOCUMENT CONFIDENTIEL — ESPACE MENTOR/JURY</span>
+    <h1>Grille d'évaluation ECF</h1>
+    <p class="subtitle">Module Projet 1 — « Analyser son secteur d'activité » — Semaine 4 — Soutenance</p>
+    <p class="competence">Assurer une veille commerciale · Compétence professionnelle n°1 (Bloc AT1, REAC TP-00338)</p>
+
+    <div class="toolbar">
+      <button class="action" onclick="window.print()">🖨 Exporter en PDF / Imprimer</button>
+      <button class="action secondary" onclick="resetForm()">↺ Réinitialiser la grille</button>
+    </div>
+
+    <table class="id-table">
+      <tr><td>Nom Prénom</td><td><input type="text" id="nomApprenant"></td></tr>
+      <tr><td>Date de la soutenance</td><td><input type="date" id="dateSoutenance"></td></tr>
+      <tr><td>Formateur évaluateur</td><td><input type="text" id="formateur"></td></tr>
+    </table>
+    <div class="version-row">
+      <label><input type="radio" name="version" value="veltrix" onchange="syncRadio(this)"><span class="radio-glyph">○</span> Fictive (VELTRIX TECHNOLOGIES)</label>
+      <label><input type="radio" name="version" value="reelle" onchange="syncRadio(this)"><span class="radio-glyph">○</span> Entreprise réelle</label>
+    </div>
+
+    <div class="note-box">
+      <strong>A — Acquis avec excellence &nbsp; B — Acquis &nbsp; C — En cours d'acquisition &nbsp; D — Non acquis</strong><br/><br/>
+      Cette grille évalue l'acquisition de compétences par niveau (A/B/C/D), sans note chiffrée ni total sur 100. Aucun score numérique ne doit être communiqué à l'apprenant.
+    </div>
+
+    <div class="section-title">Bloc 1 — Livrables écrits (rapport d'analyse sectorielle, diaporama)</div>
+    <table>
+      <tr><th class="crit-col" style="width:46%;">Critère</th><th class="lvl-A">A</th><th class="lvl-B">B</th><th class="lvl-C">C</th><th class="lvl-D">D</th></tr>
+      <tr>
+        <td>Pertinence et justification des sources de veille mobilisées</td>
+        <td class="radio-cell lvl-A"><label><input type="radio" name="b1c1" value="A" onchange="syncRadio(this)"><span class="radio-glyph">○</span></label></td>
+        <td class="radio-cell lvl-B"><label><input type="radio" name="b1c1" value="B" onchange="syncRadio(this)"><span class="radio-glyph">○</span></label></td>
+        <td class="radio-cell lvl-C"><label><input type="radio" name="b1c1" value="C" onchange="syncRadio(this)"><span class="radio-glyph">○</span></label></td>
+        <td class="radio-cell lvl-D"><label><input type="radio" name="b1c1" value="D" onchange="syncRadio(this)"><span class="radio-glyph">○</span></label></td>
+      </tr>
+      <tr>
+        <td>Qualité de la cartographie concurrentielle (4 concurrents ou plus, argumentés)</td>
+        <td class="radio-cell lvl-A"><label><input type="radio" name="b1c2" value="A" onchange="syncRadio(this)"><span class="radio-glyph">○</span></label></td>
+        <td class="radio-cell lvl-B"><label><input type="radio" name="b1c2" value="B" onchange="syncRadio(this)"><span class="radio-glyph">○</span></label></td>
+        <td class="radio-cell lvl-C"><label><input type="radio" name="b1c2" value="C" onchange="syncRadio(this)"><span class="radio-glyph">○</span></label></td>
+        <td class="radio-cell lvl-D"><label><input type="radio" name="b1c2" value="D" onchange="syncRadio(this)"><span class="radio-glyph">○</span></label></td>
+      </tr>
+      <tr>
+        <td>Robustesse de l'analyse SWOT (étayée par des données réelles, pas des généralités)</td>
+        <td class="radio-cell lvl-A"><label><input type="radio" name="b1c3" value="A" onchange="syncRadio(this)"><span class="radio-glyph">○</span></label></td>
+        <td class="radio-cell lvl-B"><label><input type="radio" name="b1c3" value="B" onchange="syncRadio(this)"><span class="radio-glyph">○</span></label></td>
+        <td class="radio-cell lvl-C"><label><input type="radio" name="b1c3" value="C" onchange="syncRadio(this)"><span class="radio-glyph">○</span></label></td>
+        <td class="radio-cell lvl-D"><label><input type="radio" name="b1c3" value="D" onchange="syncRadio(this)"><span class="radio-glyph">○</span></label></td>
+      </tr>
+      <tr>
+        <td>Pertinence et priorisation des recommandations stratégiques</td>
+        <td class="radio-cell lvl-A"><label><input type="radio" name="b1c4" value="A" onchange="syncRadio(this)"><span class="radio-glyph">○</span></label></td>
+        <td class="radio-cell lvl-B"><label><input type="radio" name="b1c4" value="B" onchange="syncRadio(this)"><span class="radio-glyph">○</span></label></td>
+        <td class="radio-cell lvl-C"><label><input type="radio" name="b1c4" value="C" onchange="syncRadio(this)"><span class="radio-glyph">○</span></label></td>
+        <td class="radio-cell lvl-D"><label><input type="radio" name="b1c4" value="D" onchange="syncRadio(this)"><span class="radio-glyph">○</span></label></td>
+      </tr>
+      <tr>
+        <td>Structure du rapport en 5 parties et lien explicite avec le Dossier Professionnel</td>
+        <td class="radio-cell lvl-A"><label><input type="radio" name="b1c5" value="A" onchange="syncRadio(this)"><span class="radio-glyph">○</span></label></td>
+        <td class="radio-cell lvl-B"><label><input type="radio" name="b1c5" value="B" onchange="syncRadio(this)"><span class="radio-glyph">○</span></label></td>
+        <td class="radio-cell lvl-C"><label><input type="radio" name="b1c5" value="C" onchange="syncRadio(this)"><span class="radio-glyph">○</span></label></td>
+        <td class="radio-cell lvl-D"><label><input type="radio" name="b1c5" value="D" onchange="syncRadio(this)"><span class="radio-glyph">○</span></label></td>
+      </tr>
+    </table>
+
+    <div class="section-title">Bloc 2 — Soutenance orale</div>
+    <table>
+      <tr><th class="crit-col" style="width:46%;">Critère</th><th class="lvl-A">A</th><th class="lvl-B">B</th><th class="lvl-C">C</th><th class="lvl-D">D</th></tr>
+      <tr>
+        <td>Clarté et structure de la présentation (diaporama 9 slides)</td>
+        <td class="radio-cell lvl-A"><label><input type="radio" name="b2c1" value="A" onchange="syncRadio(this)"><span class="radio-glyph">○</span></label></td>
+        <td class="radio-cell lvl-B"><label><input type="radio" name="b2c1" value="B" onchange="syncRadio(this)"><span class="radio-glyph">○</span></label></td>
+        <td class="radio-cell lvl-C"><label><input type="radio" name="b2c1" value="C" onchange="syncRadio(this)"><span class="radio-glyph">○</span></label></td>
+        <td class="radio-cell lvl-D"><label><input type="radio" name="b2c1" value="D" onchange="syncRadio(this)"><span class="radio-glyph">○</span></label></td>
+      </tr>
+      <tr>
+        <td>Gestion du temps (25 min)</td>
+        <td class="radio-cell lvl-A"><label><input type="radio" name="b2c2" value="A" onchange="syncRadio(this)"><span class="radio-glyph">○</span></label></td>
+        <td class="radio-cell lvl-B"><label><input type="radio" name="b2c2" value="B" onchange="syncRadio(this)"><span class="radio-glyph">○</span></label></td>
+        <td class="radio-cell lvl-C"><label><input type="radio" name="b2c2" value="C" onchange="syncRadio(this)"><span class="radio-glyph">○</span></label></td>
+        <td class="radio-cell lvl-D"><label><input type="radio" name="b2c2" value="D" onchange="syncRadio(this)"><span class="radio-glyph">○</span></label></td>
+      </tr>
+      <tr>
+        <td>Qualité des réponses aux questions du jury</td>
+        <td class="radio-cell lvl-A"><label><input type="radio" name="b2c3" value="A" onchange="syncRadio(this)"><span class="radio-glyph">○</span></label></td>
+        <td class="radio-cell lvl-B"><label><input type="radio" name="b2c3" value="B" onchange="syncRadio(this)"><span class="radio-glyph">○</span></label></td>
+        <td class="radio-cell lvl-C"><label><input type="radio" name="b2c3" value="C" onchange="syncRadio(this)"><span class="radio-glyph">○</span></label></td>
+        <td class="radio-cell lvl-D"><label><input type="radio" name="b2c3" value="D" onchange="syncRadio(this)"><span class="radio-glyph">○</span></label></td>
+      </tr>
+      <tr>
+        <td>Posture professionnelle en soutenance à distance (caméra, son, présence à l'écran)</td>
+        <td class="radio-cell lvl-A"><label><input type="radio" name="b2c4" value="A" onchange="syncRadio(this)"><span class="radio-glyph">○</span></label></td>
+        <td class="radio-cell lvl-B"><label><input type="radio" name="b2c4" value="B" onchange="syncRadio(this)"><span class="radio-glyph">○</span></label></td>
+        <td class="radio-cell lvl-C"><label><input type="radio" name="b2c4" value="C" onchange="syncRadio(this)"><span class="radio-glyph">○</span></label></td>
+        <td class="radio-cell lvl-D"><label><input type="radio" name="b2c4" value="D" onchange="syncRadio(this)"><span class="radio-glyph">○</span></label></td>
+      </tr>
+    </table>
+
+    <div class="note-box">
+      <strong>★ Rôle de cette grille —</strong> outil de suivi transmis au jury et au mentor, elle ne sanctionne pas le parcours. Seule l'épreuve de certification finale valide le Titre Professionnel.
+    </div>
+    <div class="note-box" style="background:#F5F5F5;border-color:#DDDDDD;color:#444444;">
+      <p style="margin:0 0 10px 0;">En cas de niveau insuffisant (D sur un critère structurant, ou plusieurs D), la soutenance orale est reprise avec un questionnement approfondi — mesure d'accompagnement, pas une sanction. Le jury reste juge, sur avis motivé consigné en Observations, de la nécessité d'une reprise même en l'absence de D strict.</p>
+      <p style="margin:0;"><strong>Exception — intégrité du dossier écrit :</strong> si le dossier écrit est manifestement vide ou rédigé par une IA générative plutôt que par l'apprenant, une mise en garde formelle est adressée à l'apprenant, et portée à la connaissance du mentor/formateur — ce n'est plus une simple reprise de soutenance.</p>
+    </div>
+
+    <div class="section-title">Observations</div>
+    <textarea id="observations" rows="4"></textarea>
+
+    <div class="section-title">Signature</div>
+
+    <div class="sig-block">
+      <label class="name">Formateur évaluateur — à signer ci-dessous (souris, pavé tactile ou au doigt) <span class="sig-date">Date : <input type="date" id="dateSignatureFormateur"></span></label>
+      <canvas class="sigpad" id="sigFormateur" width="600" height="200"></canvas>
+      <div class="sig-actions"><button class="action small secondary" onclick="clearSignature('sigFormateur')">Effacer la signature</button></div>
+    </div>
+
+    <p class="footer-note">© My Partner School – Document confidentiel · Titre Professionnel Négociateur Technico-Commercial · TP-00338 · Niveau 5</p>
+  </div>
+
+<script>
+  function syncRadio(input) {
+    var name = input.name;
+    var all = document.querySelectorAll('input[name="' + name + '"]');
+    all.forEach(function (radio) {
+      var glyph = radio.closest('label').querySelector('.radio-glyph');
+      glyph.textContent = radio.checked ? '●' : '○';
+    });
+  }
+
+  function resetForm() {
+    if (!confirm('Réinitialiser toute la grille ? Cette action efface les champs, cases et signatures remplis.')) return;
+    document.querySelectorAll('input[type="text"], input[type="date"], textarea').forEach(function (el) { el.value = ''; });
+    document.querySelectorAll('input[type="radio"]').forEach(function (el) {
+      el.checked = false;
+      var glyph = el.closest('label').querySelector('.radio-glyph');
+      glyph.textContent = '○';
+    });
+    clearSignature('sigFormateur');
+  }
+
+  // --- Pad de signature (souris, tactile, stylet) ---
+  function setupSignaturePad(canvasId) {
+    var canvas = document.getElementById(canvasId);
+    var ctx = canvas.getContext('2d');
+    ctx.lineWidth = 2.2;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.strokeStyle = '#1A1A1A';
+    var drawing = false;
+
+    function getPos(e) {
+      var rect = canvas.getBoundingClientRect();
+      var scaleX = canvas.width / rect.width;
+      var scaleY = canvas.height / rect.height;
+      return { x: (e.clientX - rect.left) * scaleX, y: (e.clientY - rect.top) * scaleY };
+    }
+
+    canvas.addEventListener('pointerdown', function (e) {
+      drawing = true;
+      canvas.setPointerCapture(e.pointerId);
+      var p = getPos(e);
+      ctx.beginPath();
+      ctx.moveTo(p.x, p.y);
+      e.preventDefault();
+    });
+    canvas.addEventListener('pointermove', function (e) {
+      if (!drawing) return;
+      var p = getPos(e);
+      ctx.lineTo(p.x, p.y);
+      ctx.stroke();
+      e.preventDefault();
+    });
+    canvas.addEventListener('pointerup', function () { drawing = false; });
+    canvas.addEventListener('pointercancel', function () { drawing = false; });
+    canvas.addEventListener('pointerleave', function () { drawing = false; });
+  }
+
+  function clearSignature(canvasId) {
+    var canvas = document.getElementById(canvasId);
+    var ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+
+  setupSignaturePad('sigFormateur');
+</script>
+</body>
+</html>
