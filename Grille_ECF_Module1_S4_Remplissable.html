@@ -155,6 +155,7 @@
     body { background: #FFFFFF; padding: 0; }
     .sheet { box-shadow: none; padding: 0; max-width: 100%; }
     .toolbar { display: none; }
+    .deposit-reminder { display: none; }
     input[type="text"], input[type="date"], textarea { border: none; border-bottom: 1px solid #999999; border-radius: 0; padding: 2px 0; }
     canvas.sigpad { border: 1px solid #999999; }
   }
@@ -170,6 +171,11 @@
     <div class="toolbar">
       <button class="action" onclick="window.print()">🖨 Exporter en PDF / Imprimer</button>
       <button class="action secondary" onclick="resetForm()">↺ Réinitialiser la grille</button>
+    </div>
+    <div class="note-box deposit-reminder" style="margin-top:-8px;">
+      Une fois remplie et signée : exporte en PDF (bouton ci-dessus) puis dépose le fichier dans le
+      <a href="https://drive.google.com/drive/folders/18QBfJUkj8UPD1GtB8WONFNRjmRmMmpqa?usp=drive_link" target="_blank" rel="noopener noreferrer" style="color:var(--blue-dark);font-weight:bold;">dossier de dépôt des grilles ECF</a>,
+      nommé <code style="background:#EFEFEF;padding:2px 6px;border-radius:4px;">AAMMJJ_Nom_Prénom_PX</code> (ex. <code style="background:#EFEFEF;padding:2px 6px;border-radius:4px;">260930_Dupuis_Corinne_P3</code> — P1 pour ce module).
     </div>
 
     <table class="id-table">
